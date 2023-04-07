@@ -30,10 +30,10 @@ const addBlog = async (req, res, next) => {
         title,
         description,
         image,
-        user,
-        createdAt,
-        likes,
-        comments
+        user
+        // createdAt,
+        // likes,
+        // comments
     });
     try {
         const session = await mongoose.startSession();
@@ -151,6 +151,102 @@ const likeAndUnlikePost = async (req, res, next) => {
     }
 }
 
+const addComment = async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        const blog = await Blog.findById(id);
+        if(!blog) {
+            return res.status(404).json({
+                success: false,
+                message: "Blog not found"
+            })
+        }
+        let commentIndex = -1;
+
+        blog.comments.forEach((item, index) => {
+            if(item.user.toString() === req.user._id.toString()) {
+                commentIndex = index;
+            }
+        })
+
+        if(commentIndex !== -1) {
+            blog.comments[commentIndex].comment = req.body.comment;
+    
+            await blog.save();
+            return res.status(200).json({
+                success: true,
+                message: "comment updated"
+            })
+        }else {
+            blog.comments.push({
+                user: req.user._id,
+                comment: req.body.comment
+            });
+
+            await blog.save();
+            return res.status(200).json({
+                success: true,
+                message: "Comment added"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
+const deleteComment = async (req, res, next) => {
+    try {
+        const blog = await blog.findById(req.params.id);
+
+        if(!blog) {
+            return res.status(404).json({
+                success: false,
+                message: "Blog not found"
+            })
+        }
+        if (blog.user.toString() === req.user._id.toString()) {
+            if(req.body.commentId == undefined) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Comment Id is required"
+                })
+            }
+            blog.comments.forEach((item, index) => {
+                if(item._id.toString() === req.body.commentId.toString()) {
+                    return post.comments.splice(index, 1);
+                }
+            });
+            await post.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "",
+            })
+        }else {
+            blog.comments.forEach((item, index) => {
+                if(item.user.toString() === req.user._id.toString()) {
+                    return post.comments.splice(index, 1);
+                }
+            })
+            await postsave();
+
+            res.status(200).json({
+                success: true,
+                message: "Your comment has been deleted"
+            });
+        }
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
     getAllBlogs,
     addBlog,
@@ -158,5 +254,7 @@ module.exports = {
     getById,
     deleteBlog,
     getByUserId,
-    likeAndUnlikePost
+    likeAndUnlikePost,
+    addComment,
+    deleteComment
  }

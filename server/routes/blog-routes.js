@@ -9,5 +9,7 @@ blogRouter.get('/:id', myFunctions.getById);
 blogRouter.delete('/:id', myFunctions.deleteBlog);
 blogRouter.get('/user/:id', myFunctions.getByUserId);
 blogRouter.post('/:id', myFunctions.likeAndUnlikePost);
+blogRouter.put('/comment/:id', myFunctions.addComment);
+blogRouter.delete('/comment/:id', myFunctions.deleteComment);
 
 module.exports = blogRouter;
