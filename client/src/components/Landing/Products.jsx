@@ -7,8 +7,8 @@ import pimage3 from '../images/s3.jpg'
 function Products(){
     return(
         <div id='products'>
-            <h1>What we Offer</h1>
-            <p className="details">Apart from extensive bio designing options, we also provide the following services to help you socialize.</p>
+            <h1>WHAT WE OFFER </h1><br />
+            <p className="details"> <br/>Apart from extensive bio designing options, we also provide the following services to help you socialize.</p>
             <div className="a-container">
                 <Prodcutbox image={pimage1} title="Chat System " />
                 <Prodcutbox image={pimage2} title="Communities" />
