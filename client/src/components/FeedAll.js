@@ -1,10 +1,10 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import React, { useState } from "react";
-import Post from "./Post";
+import PostAll from "./PostAll";
 
-const Feed = ({blogs,user,fetchposts}) => {
+const Feed = ({blogsall,fetchposts}) => {
   const [loading, setLoading] = useState(true);
-console.log(blogs);
+console.log(blogsall);
   setTimeout(() => {
     setLoading(false);
   }, [3000]);
@@ -21,9 +21,9 @@ console.log(blogs);
       ) : (
         <>
           
-     { blogs?.map((e,i)=>{
+     { blogsall?.map((e,i)=>{
           return <div key={i}>
-            <Post data={e} user={user}  fetchposts={fetchposts}/>
+            <PostAll data={e}   fetchposts={fetchposts}/>
           </div>
       })}
         </>

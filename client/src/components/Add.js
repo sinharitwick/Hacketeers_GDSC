@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Add as AddIcon,
   DateRange,
@@ -34,7 +35,20 @@ const UserBox = styled(Box)({
   marginBottom: "20px",
 });
 
-const Add = () => {
+const Add = ({user,fetchposts}) => {
+  const [post, setPost] = useState({title:"",description:"",imageurl:""})
+  const handlechange=(e)=>{
+      setPost({...post,[e.target.name]:e.target.value});
+  }
+  const host="http://localhost:5000"
+  const handleAdd=async()=>{
+      const ress=await axios.post(`${host}/api/blog/add`,{title:post.title,description:post.description,image:post.imageurl,user:localStorage.getItem('auth-token')});
+      const d=ress.data;
+      console.log(d);
+      setPost({title:"",description:"",imageurl:""})
+      setOpen(false)
+      fetchposts();
+  }
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -58,8 +72,8 @@ const Add = () => {
         aria-describedby="modal-modal-description"
       >
         <Box
-          width={400}
-          height={280}
+          width={600}
+          height={600}
           bgcolor={"background.default"}
           color={"text.primary"}
           p={3}
@@ -70,20 +84,55 @@ const Add = () => {
           </Typography>
           <UserBox>
             <Avatar
-              src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              sx={{ width: 30, height: 30 }}
-            />
+            
+            >{user?.name?.charAt(0)}</Avatar>
             <Typography fontWeight={500} variant="span">
-              John Doe
+             {user?.name}
             </Typography>
           </UserBox>
+          <Typography fontWeight={500} variant="span">
+            Title
+            </Typography>
           <TextField
             sx={{ width: "100%" }}
             id="standard-multiline-static"
             multiline
-            rows={3}
+            rows={1}
             placeholder="What's on your mind?"
             variant="standard"
+            name="title"
+            value={post.title}
+            onChange={handlechange}
+          />
+          
+          {/* <div className="m-5">fdfdb</div> */}
+             <Typography fontWeight={500} variant="span">
+             Description
+            </Typography>
+          <TextField
+            sx={{ width: "100%" }}
+            id="standard-multiline-static"
+            multiline
+            rows={2}
+            placeholder="What's on your mind?"
+            variant="standard"
+            name="description"
+            value={post.description}
+            onChange={handlechange}
+          />
+             <Typography fontWeight={500} variant="span">
+             Image Url
+            </Typography>
+          <TextField
+            sx={{ width: "100%" }}
+            id="standard-multiline-static"
+            multiline
+            rows={1}
+            name="imageurl"
+            placeholder="What's on your mind?"
+            variant="standard"
+            value={post.imageurl}
+            onChange={handlechange}
           />
           <Stack direction="row" gap={1} mt={2} mb={3}>
             <EmojiEmotions color="primary" />
@@ -96,7 +145,7 @@ const Add = () => {
             variant="contained"
             aria-label="outlined primary button group"
           >
-            <Button>Post</Button>
+            <Button onClick={handleAdd} >Post</Button>
             <Button sx={{ width: "100px" }}>
               <DateRange />
             </Button>

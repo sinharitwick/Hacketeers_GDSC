@@ -9,9 +9,9 @@ const getAllBlogs = async (req, res, next) => {
     } catch (err) {
         return console.log(err)
     }
-    if(!blogs)
-    return res.status(404).json({message: "No Blogs Found"})
-    return res.status(200).json({blogs})
+    // if(!blogs)
+    // return res.status(404).json({message: "No Blogs Found"})
+    return res.status(200).json({blogs:blogs})
 }
 
 const addBlog = async (req, res, next) => {
@@ -26,38 +26,42 @@ const addBlog = async (req, res, next) => {
     if(!existingUser){
         return res.status(400).json({message: "Unable to Find a User by this ID"})
     }
-    const blog = new Blog({
-        title,
+    const blogbj={title,
         description,
         image,
         user
-        // createdAt,
+    // createdAt,
         // likes,
         // comments
-    });
+    }
+    const blog = new Blog(blogbj);
     try {
-        const session = await mongoose.startSession();
-        session.startTransaction();
-        await blog.save({session});
-        existingUser.blogs.push(blog);
-        await existingUser.save({session});
-        await session.commitTransaction();
+        // const session = await mongoose.startSession();
+        // session.startTransaction();
+        // await blog.save({session});
+        // existingUser.blogs.push(blog);
+        // await existingUser.save({session});
+        // await session.commitTransaction();
+        await blog.save();
+        return res.status(200).json({blog:blogbj});
+
     } catch (err) {
         console.log(err);
         return res.status(500).json({message: err})
     }
-    return res.status(200).json({blog});
+    
 }
 
 const updateBlog = async (req, res, next) => {
-    const { title, description } = req.body;
+    const { title, description, image } = req.body;
     const blogId = req.params.id;
     let blog;
     try {
         blog = await Blog.findByIdAndUpdate(blogId, {
             title,
-            description
-        })
+            description,
+            image
+        },{new:true})
     } catch (err) {
         return console.log(err)
     }
@@ -84,16 +88,16 @@ const deleteBlog = async(req, res, next) => {
     const id = req.params.id;
     let blog;
     try {
-        blog = await Blog.findByIdAndRemove(id).populate('user');
-        await blog.user.blogs.pull(blog);
-        await blog.user.save();
+        blog = await Blog.findByIdAndRemove(id);
+        // await blog.user.blogs.pull(blog);
+        // await blog.user.save();
     } catch (err) {
         return console.log(err);
     }
     if(!blog){
         return res.status(500).json({message: "Unable to delete"})
     }
-    return res.status(200).json({message: "Successfully deleted"});
+    return res.status(200).json({deleted:blog,message: "Successfully deleted"});
 }
 
 const getByUserId = async (req, res, next) => {
@@ -246,8 +250,19 @@ const deleteComment = async (req, res, next) => {
         });
     }
 }
-
+const getPostByUser=async(req,res,next)=>{
+    const userId=req.params.id;
+    try {
+        const resp=await Blog.find({user:userId});
+        return res.status(200).json({blogs:resp})
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal sever Error")
+    }
+}
 module.exports = {
+    getPostByUser,
     getAllBlogs,
     addBlog,
     updateBlog,
