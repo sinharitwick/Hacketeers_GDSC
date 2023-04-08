@@ -146,9 +146,9 @@ const Add = ({user,fetchposts}) => {
             aria-label="outlined primary button group"
           >
             <Button onClick={handleAdd} >Post</Button>
-            <Button sx={{ width: "100px" }}>
+            {/* <Button sx={{ width: "100px" }}>
               <DateRange />
-            </Button>
+            </Button> */}
           </ButtonGroup>
         </Box>
       </SytledModal>

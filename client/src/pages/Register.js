@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
 import "./Register.css"
-import {useNavigate} from 'react-router-dom'
-import bgimg from '../components/images/userimg.jpg';
+import {Link, useNavigate} from 'react-router-dom'
+import bgimg from '../components/images/registerimage.jpg';
 export default function Register() {
     let navigate= useNavigate();
     const [name, setName] = useState("");
@@ -31,11 +31,13 @@ export default function Register() {
         <h2>Sign Up</h2>
         <span>Sign up to enjoy our service</span>
         <form id='form'className='flex flex-col'>
-          <input type="text" placeholder='name' value={name} onChange={handlename}/>
-          <input type="email" placeholder='email' value={email} onChange={handleemail}/>
-          <input type="password" placeholder='password' value={password} onChange={handlepass
+          <input type="text" placeholder='Enter your name' value={name} onChange={handlename}/>
+          <input type="email" placeholder='Enter your email id' value={email} onChange={handleemail}/>
+          <input type="password" placeholder='Enter a password' value={password} onChange={handlepass
         }/>
           <button onClick={register} className='btn'>Sign Up</button>
+          <span>Already have an account? <Link to="/login">Login</Link></span>
+          <span><Link to="/">&#x2190; Back to Home </Link></span>
         </form>
       </div>
       <div className="col-2">

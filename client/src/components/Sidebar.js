@@ -56,7 +56,7 @@ import {
                 <ListItemIcon>
                   <AccountBox />
                 </ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText primary="My Posts" />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
