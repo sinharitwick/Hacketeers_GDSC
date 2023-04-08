@@ -6,6 +6,7 @@ import Header from '../components/Landing/Header';
 import Products from '../components/Landing/Products';
 import About from '../components/Landing/About';
 import Contact from '../components/Landing/Contact';
+import Footer from '../components/Landing/Footer';
 import {css} from "@emotion/react";
 import ScaleLoader from 'react-spinners/ScaleLoader';
 
@@ -37,6 +38,7 @@ function Landing() {
         <Products/>
         <About/>
         <Contact/>
+        <Footer/>
         </>
       }
 
