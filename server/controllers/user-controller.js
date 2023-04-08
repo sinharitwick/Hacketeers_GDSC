@@ -29,7 +29,7 @@ const signup = async(req, res, next) => {
         name,
         email,
         password: hashedPassword,
-        blogs: []
+        // blogs: []
     });
 
     try {
@@ -37,7 +37,7 @@ const signup = async(req, res, next) => {
     } catch (err) {
         return console.log(err);
     }
-    return res.status(201).json({user});
+    return res.status(200).json({userId:user._id});
 }
 
 const login = async(req, res, next) => {
@@ -53,10 +53,20 @@ const login = async(req, res, next) => {
     const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
     if(!isPasswordCorrect)
     return res.status(400).json({message: "Incorrect password"});
-    return res.status(200).json({message: "Login successful"});
+    return res.status(200).json({message: "Login successful",userId:existingUser._id});
 }
-
+const getUserById=async(req,res,next)=>{
+    const userId=req.params.id;
+   try {
+    const userdata=await User.findById(userId);
+    res.status(200).json({data:userdata});
+   } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+   }
+}
 module.exports = {
+    getUserById,
     getAllUsers,
     signup,
     login

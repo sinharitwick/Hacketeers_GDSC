@@ -1,4 +1,4 @@
-import {  Delete, EditNote, Favorite, FavoriteBorder, MoreVert, Share, Update } from "@mui/icons-material";
+import {  Delete, Favorite, FavoriteBorder, MoreVert, Share } from "@mui/icons-material";
 import {
   Avatar,
   Card,
@@ -12,32 +12,39 @@ import {
   
 } from "@mui/material";
 import axios from "axios";
-import Edit from './Edit'
+import {useEffect,useState} from 'react'
 import Comment from "./Comment";
 import AddComments from "./AddComments";
 const Post = ({data,user,fetchposts}) => {
   const host="http://localhost:5000"
   const id=localStorage.getItem("auth-token");
-  const handledelete=async()=>{
-    const ress= await axios.delete(`${host}/api/blog/post/delete/${data._id}`);
-    console.log(ress.data);
-    fetchposts();
-  }
+//   const handledelete=async()=>{
+//     const ress= await axios.delete(`${host}/api/blog/post/delete/${data._id}`);
+//     console.log(ress.data);
+//     fetchposts();
+//   }
+const [userinfo, setUserinfo] = useState({})
+const handlegetall=async()=>{
+  const ress=await axios.get(`${host}/api/user/getuser/${data?.user}`);
+  const d=ress.data;
+  setUserinfo(d.data);
+}
+
+useEffect(() => {
+  
+  handlegetall()
+ 
+}, [])
+
   let date=new Date(data?.createdAt).toDateString();
   return (
     <Card sx={{ margin: 5 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
-            {user?.name[0]}
+            {userinfo?.name?.charAt(0)}
           </Avatar>
         }
-        action={
-          <IconButton onClick={handledelete} aria-label="settings">
-            <Delete />
-          </IconButton>
-        }
-        
         title={data?.title}
         subheader={date}
       />
@@ -59,7 +66,9 @@ const Post = ({data,user,fetchposts}) => {
             checkedIcon={<Favorite sx={{ color: "red" }} />}
           />
         </IconButton>
-       <Edit data={data} user={user} fetchposts={fetchposts}/>
+        <IconButton aria-label="share">
+          <Share />
+        </IconButton>
        
       </CardActions>
       <AddComments/>

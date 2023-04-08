@@ -1,5 +1,5 @@
 import { Mail, Pets } from "@mui/icons-material";
-
+import { useNavigate } from "react-router-dom";
 import {
   AppBar,
   Avatar,
@@ -18,6 +18,7 @@ const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
 });
+
 
 const Search = styled("div")(({ theme }) => ({
   backgroundColor: "white",
@@ -45,11 +46,12 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  let navigate=useNavigate();
   return (
     <AppBar position="sticky" sx={{backgroundColor:"#800000"}}>
       <StyledToolbar>
         <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
-          Hacketers
+          CollegeClique
         </Typography>
         <Pets sx={{ display: { xs: "block", sm: "none" } }} />
         <Search>
@@ -90,7 +92,7 @@ const Navbar = () => {
       >
         <MenuItem>Profile</MenuItem>
         <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={()=>{localStorage.removeItem('auth-token');navigate('/')}}>Logout</MenuItem>
       </Menu>
     </AppBar>
   );
