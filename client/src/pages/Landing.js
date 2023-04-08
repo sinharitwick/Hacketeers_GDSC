@@ -22,7 +22,7 @@ function Landing() {
     setloading(true);
     setTimeout(() => {
     setloading(false)
-    }, 5000);
+    }, 1000);
   },[])
 
   return (

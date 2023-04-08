@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
 import "./Login.css"
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import bgimg from '../components/images/userimg.jpg';
 export default function Login() {
     let navigate= useNavigate();
@@ -28,10 +28,11 @@ export default function Login() {
         <h2>Sign In</h2>
         <span>Login and enjoy our service</span>
         <form id='form'className='flex flex-col'>
-          <input type="text" placeholder='username' value={email} onChange={handleemail}/>
-          <input type="password" placeholder='password' value={password} onChange={handlepass
-        }/>
+          <input type="email" placeholder='Enter email' value={email} onChange={handleemail}/>
+          <input type="password" placeholder='Enter password' value={password} onChange={handlepass}/>
           <button onClick={login} className='btn'>Login</button>
+          <span>Don't have an account? <Link to="/register">Sign Up</Link></span>
+          <span><Link to="/">&#x2190; Back to Home </Link></span>
         </form>
       </div>
       <div className="col-2">

@@ -45,7 +45,7 @@ const Post = ({data,user,fetchposts}) => {
         component="img"
         height="20%"
         image={data?.image}
-        alt="Paella dish"
+        alt="image here"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -62,8 +62,8 @@ const Post = ({data,user,fetchposts}) => {
        <Edit data={data} user={user} fetchposts={fetchposts}/>
        
       </CardActions>
-      <AddComments/>
-      <Comment/>
+      {/* <AddComments/>
+      <Comment/> */}
     </Card>
   );
 };

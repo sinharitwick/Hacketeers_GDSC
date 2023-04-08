@@ -1,5 +1,6 @@
 import React,{useState} from "react";
-import {Link}from 'react-scroll';
+import { Link as LinkRoll }from 'react-scroll';
+import { Link } from "react-router-dom";
 import logo from '../images/logo1.jpg'
 function Navbar(){
     const[nav,setnav]=useState(false);
@@ -12,21 +13,20 @@ function Navbar(){
     window.addEventListener('scroll',changeBackground);
     return(
         <nav className={nav ? "nav active":"nav"}>
-            <Link to= 'main' className='logo' smooth={true} duration={200}>
+            <LinkRoll to= 'main' className='logo' smooth={true} duration={200}>
                 <img src= {logo} alt=''/>
-            </Link>
+            </LinkRoll>
             <input className="menu-btn" type="checkbox" id="menu-btn"/>
             <label className="menu-icon" for='menu-btn'>
                 <span className="nav-icon"></span>
             </label>
             <ul className="menu">
-                <li><Link to="main" smooth={true} duration={500}>Home</Link></li>
-                <li><Link to="products"smooth={true} duration={500}>Features</Link></li>
-                <li><Link to="about"smooth={true} duration={500}>About</Link></li>
-                <li><Link to="contact"smooth={true} duration={500}>Contact Us</Link></li>
-                <li><Link smooth={true} duration={500}>Login</Link></li>
-                <li><Link smooth={true} duration={500}>SIGn UP</Link></li>
-
+                <li><LinkRoll to="main" smooth={true} duration={500}>Home</LinkRoll></li>
+                <li><LinkRoll to="products"smooth={true} duration={500}>Features</LinkRoll></li>
+                <li><LinkRoll to="about"smooth={true} duration={500}>About</LinkRoll></li>
+                <li><LinkRoll to="contact"smooth={true} duration={500}>Contact Us</LinkRoll></li>
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/register">Sign Up</Link></li>
             </ul>
 
         </nav>

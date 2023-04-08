@@ -1,4 +1,4 @@
-import { Mail, Pets } from "@mui/icons-material";
+import { Mail, Pets, School } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -53,27 +53,28 @@ const Navbar = () => {
         <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
           CollegeClique
         </Typography>
-        <Pets sx={{ display: { xs: "block", sm: "none" } }} />
+        <School sx={{ display: { xs: "block", sm: "none" } }} />
         <Search>
           <InputBase placeholder="Search" />
         </Search>
         <Icons>
           <Badge badgeContent={1} color="error">
             <Mail />
-          </Badge>
-          
-          <Avatar
+          </Badge>          
+          {/* <Avatar
             sx={{ width: 30, height: 30 }}
             src="https://i.pinimg.com/736x/58/f5/29/58f5295e76b6bd5dbe0cc0c55a98ce5a.jpg"
             onClick={(e) => setOpen(true)}
-          />
+          /> */}
+          <Avatar sx={{ bgcolor: "red", width: 30, height: 30}} aria-label="recipe" onClick={(e) => setOpen(true)}>
+            {/* {user?.name} */}
+          </Avatar>
         </Icons>
         <UserBox onClick={(e) => setOpen(true)}>
           <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            sx={{ bgcolor: "red", width: 30, height: 30 }}
           />
-          <Typography variant="span">John</Typography>
+          {/* <Typography variant="span">John</Typography> */}
         </UserBox>
       </StyledToolbar>
       <Menu
@@ -91,7 +92,7 @@ const Navbar = () => {
         }}
       >
         <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
+        <MenuItem>My Account</MenuItem>
         <MenuItem onClick={()=>{localStorage.removeItem('auth-token');navigate('/')}}>Logout</MenuItem>
       </Menu>
     </AppBar>

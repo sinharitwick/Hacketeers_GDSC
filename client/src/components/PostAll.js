@@ -1,4 +1,4 @@
-import {  Delete, Favorite, FavoriteBorder, MoreVert, Share } from "@mui/icons-material";
+import {  CommentOutlined, Delete, Favorite, FavoriteBorder, MoreVert, Share } from "@mui/icons-material";
 import {
   Avatar,
   Card,
@@ -52,7 +52,7 @@ useEffect(() => {
         component="img"
         height="20%"
         image={data?.image}
-        alt="Paella dish"
+        alt="image here"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -67,12 +67,12 @@ useEffect(() => {
           />
         </IconButton>
         <IconButton aria-label="share">
-          <Share />
+          <CommentOutlined />
         </IconButton>
        
       </CardActions>
-      <AddComments/>
-      <Comment/>
+      {/* <AddComments/>
+      <Comment/> */}
     </Card>
   );
 };
