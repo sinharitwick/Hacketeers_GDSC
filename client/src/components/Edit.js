@@ -44,6 +44,7 @@ import {
     const host="http://localhost:5000"
     const handleupdate=async()=>{
       const res=await axios.put(`${host}/api/blog/update/${data._id}`,{title:post.title,description:post.description,image:post.imageurl})
+      // const res=await axios.put(`/api/blog/update/${data._id}`,{title:post.title,description:post.description,image:post.imageurl})
       const d=res.data;
       console.log(d);
       setOpen(false)

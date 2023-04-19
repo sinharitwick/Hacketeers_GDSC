@@ -17,6 +17,7 @@ export default function Login() {
     const login=async(e)=>{
         e.preventDefault();
         const user=await axios.post('http://localhost:5000/api/user/login',{email,password});
+        // const user=await axios.post('/api/user/login',{email,password});
         const data=user.data;
         localStorage.setItem('auth-token',data.userId);
         navigate('/feed');

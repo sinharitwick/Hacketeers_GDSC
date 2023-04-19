@@ -20,6 +20,7 @@ const Post = ({data,user,fetchposts}) => {
   const id=localStorage.getItem("auth-token");
   const handledelete=async()=>{
     const ress= await axios.delete(`${host}/api/blog/post/delete/${data._id}`);
+    // const ress= await axios.delete(`/api/blog/post/delete/${data._id}`);
     console.log(ress.data);
     fetchposts();
   }

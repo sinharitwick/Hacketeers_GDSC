@@ -26,6 +26,7 @@ const Post = ({data,user,fetchposts}) => {
 const [userinfo, setUserinfo] = useState({})
 const handlegetall=async()=>{
   const ress=await axios.get(`${host}/api/user/getuser/${data?.user}`);
+  // const ress=await axios.get(`/api/user/getuser/${data?.user}`);
   const d=ress.data;
   setUserinfo(d.data);
 }

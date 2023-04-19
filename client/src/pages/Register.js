@@ -20,6 +20,7 @@ export default function Register() {
     const register=async(e)=>{
         e.preventDefault();
         const user=await axios.post('http://localhost:5000/api/user/signup',{name, email, password});
+        // const user=await axios.post('/api/user/signup',{name, email, password});
         const data=user.data;
         localStorage.setItem('auth-token',data.userId);
         navigate('/feed');
