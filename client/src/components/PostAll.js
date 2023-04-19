@@ -17,7 +17,7 @@ import Comment from "./Comment";
 import AddComments from "./AddComments";
 const Post = ({data,user,fetchposts}) => {
   // const host="http://localhost:5000"
-  const host="https://hacketeers-gdsc-backend-iix4pzxit-sinharitwick.vercel.app"
+  const host="https://gdsc_clique-1-x1004983.deta.app"
   const id=localStorage.getItem("auth-token");
 //   const handledelete=async()=>{
 //     const ress= await axios.delete(`${host}/api/blog/post/delete/${data._id}`);

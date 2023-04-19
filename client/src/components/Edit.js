@@ -42,7 +42,7 @@ import {
 
     const [post, setPost] = useState({title:data?.title,description:data?.description,imageurl:data?.image})
     // const host="http://localhost:5000"
-    const host="https://hacketeers-gdsc-backend-iix4pzxit-sinharitwick.vercel.app"
+    const host="https://gdsc_clique-1-x1004983.deta.app"
     const handleupdate=async()=>{
       const res=await axios.put(`${host}/api/blog/update/${data._id}`,{title:post.title,description:post.description,image:post.imageurl})
       // const res=await axios.put(`/api/blog/update/${data._id}`,{title:post.title,description:post.description,image:post.imageurl})
