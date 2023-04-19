@@ -40,7 +40,8 @@ const Add = ({user,fetchposts}) => {
   const handlechange=(e)=>{
       setPost({...post,[e.target.name]:e.target.value});
   }
-  const host="http://localhost:5000"
+  // const host="http://localhost:5000"
+  const host="https://hacketeers-gdsc-backend-iix4pzxit-sinharitwick.vercel.app"
   const handleAdd=async()=>{
       const ress=await axios.post(`${host}/api/blog/add`,{title:post.title,description:post.description,image:post.imageurl,user:localStorage.getItem('auth-token')});
       // const ress=await axios.post(`/api/blog/add`,{title:post.title,description:post.description,image:post.imageurl,user:localStorage.getItem('auth-token')});
