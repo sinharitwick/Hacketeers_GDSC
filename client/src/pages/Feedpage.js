@@ -16,6 +16,7 @@ function Feedpage() {
   let id=localStorage.getItem('auth-token')
   const fetchPosts = async () => {
     const res =await  axios.get(`http://localhost:5000/api/blog/post/${id}`)
+    // const res =await  axios.get(`/api/blog/post/${id}`)
    const data=res.data;
     console.log(data.blogs)
     setBlogs(data.blogs);
@@ -23,12 +24,14 @@ function Feedpage() {
   const [blogsall, setBlogsall] = useState([])
   const fetchallblogs=async()=>{
     const res =await  axios.get(`http://localhost:5000/api/blog/`)
+    // const res =await  axios.get(`/api/blog/`)
    const data=res.data;
     console.log(data.blogs)
     setBlogsall(data.blogs);
   }
   const fetchdata=async()=>{
       const ress=await axios.get(`http://localhost:5000/api/user/getuser/${id}`);
+      // const ress=await axios.get(`/api/user/getuser/${id}`);
       const d=ress.data;
       setUserdata(d.data);
   }

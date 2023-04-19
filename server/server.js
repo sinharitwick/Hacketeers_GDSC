@@ -3,6 +3,7 @@ var cors = require('cors')
 const mongoose = require('mongoose')
 const router = require('./routes/user-routes')
 const blogRouter = require('./routes/blog-routes')
+const path = require('path')
 const dotenv = require('dotenv')
 
 dotenv.config();
@@ -17,6 +18,13 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/user', router); //http://localhost:5000/api/user
 app.use('/api/blog', blogRouter); //http://localhost:5000/api/blog
+
+//static files
+app.use(express.static(path.resolve(__dirname, 'client', 'build', 'index.html')))
+
+app.get('*', function(req, res){
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+})
 
 // app.get('/', (req, res) => {
 //     res.send("Hello World!")

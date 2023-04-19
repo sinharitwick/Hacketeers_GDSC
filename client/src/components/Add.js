@@ -43,6 +43,7 @@ const Add = ({user,fetchposts}) => {
   const host="http://localhost:5000"
   const handleAdd=async()=>{
       const ress=await axios.post(`${host}/api/blog/add`,{title:post.title,description:post.description,image:post.imageurl,user:localStorage.getItem('auth-token')});
+      // const ress=await axios.post(`/api/blog/add`,{title:post.title,description:post.description,image:post.imageurl,user:localStorage.getItem('auth-token')});
       const d=ress.data;
       console.log(d);
       setPost({title:"",description:"",imageurl:""})
