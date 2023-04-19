@@ -17,7 +17,7 @@ export default function Login() {
     const login=async(e)=>{
         e.preventDefault();
         // const user=await axios.post('http://localhost:5000/api/user/login',{email,password});
-        const user=await axios.post('https://hacketeers-gdsc-backend-iix4pzxit-sinharitwick.vercel.app/api/user/login',{email,password});
+        const user=await axios.post('https://gdsc_clique-1-x1004983.deta.app/api/user/login',{email,password});
         const data=user.data;
         localStorage.setItem('auth-token',data.userId);
         navigate('/feed');
